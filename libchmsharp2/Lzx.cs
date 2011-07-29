@@ -273,7 +273,7 @@ namespace CHMsharp
         }
 
         private static void ENSURE_BITS(ref int bitsleft, ref ULONG bitbuf, ref UBYTE[] ipbuf, 
-            ref ulong inpos, int n)
+            ref long inpos, int n)
         {
             while (bitsleft < n) {
                 bitbuf |= (ULONG)((ipbuf[inpos + 1] << 8) | ipbuf[inpos + 0]) << (int)(ULONG_BITS() - 16 - bitsleft);
@@ -293,7 +293,7 @@ namespace CHMsharp
         }
 
         private static void READ_BITS(ref ULONG v, int n, ref ULONG bitbuf, ref int bitsleft, 
-            ref UBYTE[] ipbuf, ref ulong inpos)
+            ref UBYTE[] ipbuf, ref long inpos)
         {
             ENSURE_BITS(ref bitsleft, ref bitbuf, ref ipbuf, ref inpos, n);
             v = PEEK_BITS(ref bitbuf, n);
@@ -316,7 +316,7 @@ namespace CHMsharp
          * bitstream using the stated table and puts it in var.
          */
         private static bool READ_HUFFSYM(ref UWORD[] tbl, ref UWORD[] hufftbl, ref LONG bitsleft, ref ULONG bitbuf,
-            ref UBYTE[] ipbuf, ref ulong inpos, ref ULONG i, int tablebits, int maxsymbols, ref UBYTE[] tablelen, 
+            ref UBYTE[] ipbuf, ref long inpos, ref ULONG i, int tablebits, int maxsymbols, ref UBYTE[] tablelen, 
             ref ULONG j, ref int var)
         {
             ENSURE_BITS(ref bitsleft, ref bitbuf, ref ipbuf, ref inpos, 16);
@@ -341,7 +341,7 @@ namespace CHMsharp
          * own special LZX way.
          */
         private static bool READ_LENGTHS(ULONG first, ULONG last, lzx_bits lb, ref ULONG bitbuf, 
-            ref LONG bitsleft, ref UBYTE[] ip, ref ulong inpos, LZXstate pState, ref UBYTE[] tablelen)
+            ref LONG bitsleft, ref UBYTE[] ip, ref long inpos, LZXstate pState, ref UBYTE[] tablelen)
         {
             lb.bb = bitbuf;
             lb.bl = bitsleft;
@@ -448,7 +448,7 @@ namespace CHMsharp
             public ULONG bb;
             public int bl;
             public UBYTE[] ip;
-            public ulong ippos;
+            public long ippos;
         };
 
         private static int lzx_read_lens(LZXstate pState, ref UBYTE[] lens, ULONG first, ULONG last, lzx_bits lb)
@@ -458,7 +458,7 @@ namespace CHMsharp
 
             ULONG bitbuf = lb.bb;
             int bitsleft = lb.bl;
-            ulong inpos = lb.ippos;
+            long inpos = lb.ippos;
             UWORD[] hufftbl = null;
             bool hr;
 
@@ -508,13 +508,13 @@ namespace CHMsharp
             return 0;
         }
 
-        public static int LZXdecompress(LZXstate pState, ref UBYTE[] ip, ref ulong inpos, ref UBYTE[] op, 
+        public static int LZXdecompress(LZXstate pState, ref UBYTE[] ip, long inpos, ref UBYTE[] op, 
             ulong outpos, int inlen, int outlen)
         {
-            ulong endinp = inpos + (ulong)inlen;
+            long endinp = inpos + inlen;
             UBYTE[] window = pState.window;
-            ulong runsrc = 0;
-            ulong rundest = 0;
+            long runsrc = 0;
+            long rundest = 0;
             UWORD[] hufftbl = null; /* used in READ_HUFFSYM macro as chosen decoding table */
 
             ULONG window_posn = pState.window_posn;
@@ -700,9 +700,9 @@ namespace CHMsharp
                                     while ((runsrc < 0) && (match_length-- > 0)) {
                                         window[rundest++] = window[runsrc + window_size]; runsrc++;
                                     }
+
                                     /* copy match data - no worries about destination wraps */
                                     while (match_length-- > 0) window[rundest++] = window[runsrc++];
-
                                 }
                             }
                             break;
@@ -807,9 +807,9 @@ namespace CHMsharp
                             break;
 
                         case LZX_BLOCKTYPE_UNCOMPRESSED:
-                            if ((inpos + (ULONG)this_run) > endinp) return DECR_ILLEGALDATA;
-                            Array.Copy(ip, (long)inpos, window, window_posn, this_run);
-                            inpos += (ULONG)this_run; window_posn += (ULONG)this_run;
+                            if ((inpos + this_run) > endinp) return DECR_ILLEGALDATA;
+                            Array.Copy(ip, inpos, window, window_posn, this_run);
+                            inpos += this_run; window_posn += (ULONG)this_run;
                             break;
 
                         default:

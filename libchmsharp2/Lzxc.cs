@@ -50,7 +50,7 @@ namespace CHMsharp
         public static Int64 DecompressBlock(ref chmFileInfo h, UInt64 block, ref byte[] ubuffer)
         {
             byte[] cbuffer = new byte[h.reset_table.block_len + 6144];
-            ulong cbufferpos = 0;
+            long cbufferpos = 0;
             UInt64 cmpStart = 0;                                /* compressed start  */
             Int64 cmpLen = 0;                                   /* compressed len    */
             int indexSlot;                                      /* cache index slot  */
@@ -86,7 +86,7 @@ namespace CHMsharp
                             cmpLen < 0                                                         ||
                             cmpLen > (LONGINT64)h.reset_table.block_len + 6144                 ||
                             Storage.FetchBytes(ref h, ref cbuffer, cmpStart, cmpLen) != cmpLen ||
-                            Lzx.LZXdecompress(h.lzx_state, ref cbuffer, ref cbufferpos, 
+                            Lzx.LZXdecompress(h.lzx_state, ref cbuffer, cbufferpos, 
                                               ref h.cache_blocks[lbuffer], 0, (int)cmpLen,
                                               (int)h.reset_table.block_len) != Lzx.DECR_OK)
                         {
@@ -113,7 +113,7 @@ namespace CHMsharp
             /* decompress the block we actually want */
             if (!GetCmpBlockBounds(ref h, block, ref cmpStart, ref cmpLen)         ||
                 Storage.FetchBytes(ref h, ref cbuffer, cmpStart, cmpLen) != cmpLen ||
-                Lzx.LZXdecompress(h.lzx_state, ref cbuffer, ref cbufferpos, 
+                Lzx.LZXdecompress(h.lzx_state, ref cbuffer, cbufferpos, 
                                   ref h.cache_blocks[lbuffer], 0, (int)cmpLen,
                               (int)h.reset_table.block_len) != Lzx.DECR_OK)
             {
@@ -128,7 +128,7 @@ namespace CHMsharp
         }
 
         /* grab a region from a compressed block */
-        public static Int64 DecompressRegion(ref chmFileInfo h, ref byte[] buf, UInt64 start, Int64 len)
+        public static Int64 DecompressRegion(ref chmFileInfo h, ref byte[] buf, ulong bufpos, UInt64 start, Int64 len)
         {
             UInt64 nBlock, nOffset;
             UInt64 nLen;
@@ -152,10 +152,10 @@ namespace CHMsharp
                 h.cache_blocks[nBlock % (LONGUINT64)h.cache_num_blocks] != null)
             {
                 Array.Copy(
-                    h.cache_blocks, 
-                    (int)((nBlock % (LONGUINT64)h.cache_num_blocks) + nOffset),
+                    h.cache_blocks[nBlock % (LONGUINT64)h.cache_num_blocks], 
+                    (int)nOffset,
                     buf,
-                    0,
+                    (int)bufpos,
                     (long)nLen);
                 h.cache_mutex.ReleaseMutex();
                 h.lzx_mutex.ReleaseMutex();
@@ -176,7 +176,7 @@ namespace CHMsharp
             gotLen = (UInt64)DecompressBlock(ref h, nBlock, ref ubuffer);
             if (gotLen < nLen)
                 nLen = gotLen;
-            Array.Copy(ubuffer, (int)nOffset, buf, 0, (int)nLen);
+            Array.Copy(ubuffer, (int)nOffset, buf, (int)bufpos, (int)nLen);
             h.lzx_mutex.ReleaseMutex();
 
             return (Int64)nLen;

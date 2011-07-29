@@ -80,7 +80,7 @@ namespace CHMsharp
         }
 
         /* enumerate the objects in the .chm archive */
-        public bool Enumerate(EnumerateLevel what, chmEnumerator e, ref object context)
+        public bool Enumerate(EnumerateLevel what, chmEnumerator e, object context)
         {
             Int32 curPage;
 
@@ -153,7 +153,7 @@ namespace CHMsharp
                         continue;
 
                     /* call the enumerator */
-                    EnumerateStatus status = e(this, ref ui, ref context);
+                    EnumerateStatus status = e(this, ui, context);
                     switch (status) {
                         case EnumerateStatus.Failure:
                             return false;
@@ -386,7 +386,7 @@ namespace CHMsharp
 
                 do {
                     /* swill another mouthful */
-                    swath = Lzxc.DecompressRegion(ref _h, ref buf, bufpos + ui.start + addr, len);
+                    swath = Lzxc.DecompressRegion(ref _h, ref buf, bufpos, ui.start + addr, len);
 
                     /* if we didn't get any... */
                     if (swath == 0)
@@ -396,7 +396,7 @@ namespace CHMsharp
                     total += swath;
                     len -= swath;
                     addr += (LONGUINT64)swath;
-                    bufpos += (LONGUINT64)swath;    /* TODO bobc: this might not be right */
+                    bufpos += (LONGUINT64)swath;
 
                 } while (len != 0);
 

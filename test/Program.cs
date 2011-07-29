@@ -24,13 +24,13 @@ namespace test
 
             chmFile chmf = chmFile.Open(args[0]);
             chmf.Enumerate(
-                EnumerateLevel.All,
+                EnumerateLevel.Normal,
                 new chmEnumerator(EnumeratorCallback),
-                ref o);
+                o);
             chmf.Close();
         }
 
-        static EnumerateStatus EnumeratorCallback(chmFile file, ref chmUnitInfo ui, ref Object context)
+        static EnumerateStatus EnumeratorCallback(chmFile file, chmUnitInfo ui, Object context)
         {
             if (!ui.path.EndsWith("/"))
                 Console.WriteLine(file.FileName + ": " + ui.path);

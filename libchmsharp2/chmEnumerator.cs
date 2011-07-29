@@ -7,6 +7,6 @@ namespace CHMsharp
 {
     public delegate EnumerateStatus chmEnumerator(
         chmFile f,
-        ref chmUnitInfo ui,
-        ref object context);
+        chmUnitInfo ui,
+        object context);
 }
