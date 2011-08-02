@@ -1,0 +1,11 @@
+bin/
+*resharper.user
+[Dd]ebug/
+[Rr]elease/
+Signed Debug/
+Signed Release/
+obj/
+*.ncb
+*.suo
+_ReSharper.*/
+*.pdb
