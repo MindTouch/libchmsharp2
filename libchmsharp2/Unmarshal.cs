@@ -33,6 +33,20 @@ namespace CHMsharp
             return true;
         }
 
+        public static bool ToInt16(ref byte[] pData, ref uint pDataPos,
+            ref uint pLenRemain, ref Int16 dest)
+        {
+            if (2 > pLenRemain)
+                return false;
+
+            dest = (Int16)(pData[pDataPos + 0] |
+                pData[pDataPos + 1] << 8);
+            pDataPos += 2;
+            pLenRemain -= 2;
+
+            return true;
+        }
+
         public static bool ToInt32(ref byte[] pData, ref uint pDataPos,
             ref uint pLenRemain, ref Int32 dest)
         {
@@ -65,6 +79,20 @@ namespace CHMsharp
             dest = temp;
             pDataPos += 8;
             pLenRemain -= 8;
+
+            return true;
+        }
+
+        public static bool ToUInt16(ref byte[] pData, ref uint pDataPos,
+            ref uint pLenRemain, ref UInt16 dest)
+        {
+            if (2 > pLenRemain)
+                return false;
+
+            dest = (ushort)(pData[pDataPos + 0] |
+                pData[pDataPos + 1] << 8);
+            pDataPos += 2;
+            pLenRemain -= 2;
 
             return true;
         }
