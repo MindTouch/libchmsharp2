@@ -42,7 +42,7 @@ namespace CHMsharp
         public const string CHMU_CONTENT = "::DataSpace/Storage/MSCompressed/Content";
         public const string CHMU_SPANINFO = "::DataSpace/Storage/MSCompressed/SpanInfo";
 
-        public static Int64 FetchBytes(ref chmFileInfo h, ref byte[] buf, UInt64 os, Int64 len)
+        public static Int64 FetchBytes(ref ChmFileInfo h, ref byte[] buf, UInt64 os, Int64 len)
         {
             Int64 readLen = 0;
             long cur = 0;

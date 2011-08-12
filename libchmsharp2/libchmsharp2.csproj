@@ -40,7 +40,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="chmEnumerator.cs" />
     <Compile Include="EnumerateStatus.cs" />
     <Compile Include="EnumerateLevel.cs" />
     <Compile Include="Storage.cs" />
@@ -49,13 +48,14 @@
     <Compile Include="Lzxc.cs" />
     <Compile Include="Pmgi.cs" />
     <Compile Include="Pmgl.cs" />
-    <Compile Include="chmUnitInfo.cs" />
-    <Compile Include="chmFile.cs" />
-    <Compile Include="cmhFileInfo.cs" />
     <Compile Include="Lzx.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="System.cs" />
     <Compile Include="Unmarshal.cs" />
+    <Compile Include="ChmEnumerator.cs" />
+    <Compile Include="ChmFile.cs" />
+    <Compile Include="ChmUnitInfo.cs" />
+    <Compile Include="ChmFileInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

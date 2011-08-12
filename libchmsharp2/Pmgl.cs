@@ -87,7 +87,7 @@ namespace CHMsharp
         }
 
         /* parse a PMGL entry into a chmUnitInfo struct; return 1 on success. */
-        public static bool ParsePgmlEntry(byte[] pEntry, ref uint os, ref chmUnitInfo ui)
+        public static bool ParsePgmlEntry(byte[] pEntry, ref uint os, ref ChmUnitInfo ui)
         {
             char[] buf = new char[Storage.CHM_MAX_PATHLEN];
             UInt64 strLen;

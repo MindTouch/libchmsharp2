@@ -71,10 +71,10 @@ namespace CHMsharp
             _entries = entries;
         }
 
-        public static SystemFile Read(chmFile f)
+        public static SystemFile Read(ChmFile f)
         {
             List<SystemFileEntry> sfelst = new List<SystemFileEntry>();
-            chmUnitInfo ui = new chmUnitInfo();
+            ChmUnitInfo ui = new ChmUnitInfo();
             byte[] buf;
             uint pos = 0, remaining = 0;
 

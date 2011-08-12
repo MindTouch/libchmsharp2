@@ -29,17 +29,17 @@ using LONGUINT64 = System.UInt64;   /* unsigned long long */
 
 namespace CHMsharp
 {
-    public sealed class chmFile
+    public sealed class ChmFile
     {
         private const int CHM_PARAM_MAX_BLOCKS_CACHED = 0;
         private const int CHM_MAX_BLOCKS_CACHED = 5;
 
-        private chmFileInfo _h;
+        private ChmFileInfo _h;
         private string _filename;
 
-        private chmFile(string filename)
+        private ChmFile(string filename)
         {
-            _h = new chmFileInfo();
+            _h = new ChmFileInfo();
             _filename = filename;
         }
 
@@ -59,7 +59,7 @@ namespace CHMsharp
         }
 
         /* enumerate the objects in the .chm archive */
-        public bool Enumerate(EnumerateLevel what, chmEnumerator e, object context)
+        public bool Enumerate(EnumerateLevel what, ChmEnumerator e, object context)
         {
             Int32 curPage;
 
@@ -73,7 +73,7 @@ namespace CHMsharp
             UInt64 ui_path_len;
 
             /* the current ui */
-            chmUnitInfo ui = new chmUnitInfo();
+            ChmUnitInfo ui = new ChmUnitInfo();
             int type_bits = ((int)what & 0x7);
             int filter_bits = ((int)what & 0xF8);
 
@@ -155,16 +155,16 @@ namespace CHMsharp
             return true;
         }
 
-        public static chmFile Open(string filename)
+        public static ChmFile Open(string filename)
         {
             byte[] sbuffer = new byte[256];
             uint sremain;
             uint sbufpos;
             chmItsfHeader itsfHeader = new chmItsfHeader();
             chmItspHeader itspHeader = new chmItspHeader();
-            chmUnitInfo uiLzxc = new chmUnitInfo();
+            ChmUnitInfo uiLzxc = new ChmUnitInfo();
             chmLzxcControlData ctlData = new chmLzxcControlData();
-            chmFile chmf = new chmFile(filename);
+            ChmFile chmf = new ChmFile(filename);
 
             /* allocate handle */
             chmf._h.fd = null;
@@ -282,7 +282,7 @@ namespace CHMsharp
         }
 
         /* resolve a particular object from the archive */
-        public bool ResolveObject(string objPath, ref chmUnitInfo ui)
+        public bool ResolveObject(string objPath, ref ChmUnitInfo ui)
         {
             /*
              * XXX: implement caching scheme for dir pages
@@ -331,7 +331,7 @@ namespace CHMsharp
         }
 
         /* retrieve (part of) an object */
-        public LONGINT64 RetrieveObject(chmUnitInfo ui, ref byte[] buf, LONGUINT64 addr, LONGINT64 len)
+        public LONGINT64 RetrieveObject(ChmUnitInfo ui, ref byte[] buf, LONGUINT64 addr, LONGINT64 len)
         {
             /* must be valid file handle */
             if (_h.fd == null)

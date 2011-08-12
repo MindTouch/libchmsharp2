@@ -66,7 +66,7 @@ namespace CHMsharp
         }
 
         /* decompress the block.  must have lzx_mutex. */
-        public static Int64 DecompressBlock(ref chmFileInfo h, UInt64 block, ref byte[] ubuffer)
+        public static Int64 DecompressBlock(ref ChmFileInfo h, UInt64 block, ref byte[] ubuffer)
         {
             byte[] cbuffer = new byte[h.reset_table.block_len + 6144];
             long cbufferpos = 0;
@@ -147,7 +147,7 @@ namespace CHMsharp
         }
 
         /* grab a region from a compressed block */
-        public static Int64 DecompressRegion(ref chmFileInfo h, ref byte[] buf, ulong bufpos, UInt64 start, Int64 len)
+        public static Int64 DecompressRegion(ref ChmFileInfo h, ref byte[] buf, ulong bufpos, UInt64 start, Int64 len)
         {
             UInt64 nBlock, nOffset;
             UInt64 nLen;
@@ -217,7 +217,7 @@ namespace CHMsharp
         }
 
         /* get the bounds of a compressed block.  return 0 on failure */
-        public static bool GetCmpBlockBounds(ref chmFileInfo h, UInt64 block, 
+        public static bool GetCmpBlockBounds(ref ChmFileInfo h, UInt64 block, 
             ref UInt64 start, ref Int64 len)
         {
             byte[] buffer = new byte[8];

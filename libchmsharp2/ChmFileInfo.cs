@@ -26,7 +26,7 @@ using System.Threading;
 
 namespace CHMsharp
 {
-    internal struct chmFileInfo {
+    internal struct ChmFileInfo {
         public FileStream fd;
 
         public Mutex mutex;
@@ -41,8 +41,8 @@ namespace CHMsharp
         public UInt32 block_len;
 
         public UInt64 span;
-        public chmUnitInfo rt_unit;
-        public chmUnitInfo cn_unit;
+        public ChmUnitInfo rt_unit;
+        public ChmUnitInfo cn_unit;
         public chmLzxcResetTable reset_table;
 
         /* LZX control data */

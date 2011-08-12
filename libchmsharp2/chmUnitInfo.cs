@@ -24,7 +24,7 @@ using System.Text;
 
 namespace CHMsharp
 {
-    public struct chmUnitInfo
+    public struct ChmUnitInfo
     {
 		public UInt64 start;
 		public UInt64 length;

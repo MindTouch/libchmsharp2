@@ -33,23 +33,42 @@ namespace test
 
         static void Main(string[] args)
         {
-            if (args.Length != 2) {
-                Console.WriteLine("USAGE: test.exe <input file> <output directory>");
+            if (args.Length != 1 && args.Length != 2) {
+                Console.WriteLine("USAGE: test.exe <input file> [ <output directory> ]");
                 return;
             }
 
-            _outdir = args[1];
+            // check if we can find the source file
+            if(!File.Exists(args[0]))
+            {
+                Console.WriteLine("ERROR: cannot find " + args[0]);
+                return;
+            }
+
+            // check if an output directory was specified
+            if(args.Length == 1) {
+                _outdir = Path.Combine(Path.GetDirectoryName(args[0]), Path.GetFileNameWithoutExtension(args[0]));
+                if(!Directory.Exists(_outdir)) {
+                    Console.WriteLine("Creating output folder: " + _outdir);
+                    Directory.CreateDirectory(_outdir);
+                } else {
+                    Console.WriteLine("Using output folder: " + _outdir);
+                }
+            } else {
+                _outdir = args[1];
+            }
+
             Object o = new Object();
 
-            chmFile chmf = chmFile.Open(args[0]);
+            ChmFile chmf = ChmFile.Open(args[0]);
             chmf.Enumerate(
                 EnumerateLevel.Normal,
-                new chmEnumerator(EnumeratorCallback),
+                EnumeratorCallback,
                 o);
             chmf.Close();
         }
 
-        static EnumerateStatus EnumeratorCallback(chmFile file, chmUnitInfo ui, Object context)
+        static EnumerateStatus EnumeratorCallback(ChmFile file, ChmUnitInfo ui, Object context)
         {
             if (!ui.path.EndsWith("/"))
                 Console.WriteLine(file.FileName + ": " + ui.path);

@@ -24,8 +24,8 @@ using System.Text;
 
 namespace CHMsharp
 {
-    public delegate EnumerateStatus chmEnumerator(
-        chmFile f,
-        chmUnitInfo ui,
+    public delegate EnumerateStatus ChmEnumerator(
+        ChmFile f,
+        ChmUnitInfo ui,
         object context);
 }
