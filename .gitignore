@@ -9,3 +9,5 @@ obj/
 *.suo
 _ReSharper.*/
 *.pdb
+*.userprefs
+*.pidb
