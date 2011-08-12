@@ -1,43 +1,22 @@
-﻿/***************************************************************************
- *             chm_lib.c - CHM archive manipulation routines               *
- *                           -------------------                           *
- *                                                                         *
- *  author:     Jed Wing <jedwin@ugcs.caltech.edu>                         *
- *  maintainer: Bob Carroll <bob.carroll@alum.rit.edu>                     *
- *  notes:      These routines are meant for the manipulation of microsoft *
- *              .chm (compiled html help) files, but may likely be used    *
- *              for the manipulation of any ITSS archive, if ever ITSS     *
- *              archives are used for any other purpose.                   *
- *                                                                         *
- *              Note also that the section names are statically handled.   *
- *              To be entirely correct, the section names should be read   *
- *              from the section names meta-file, and then the various     *
- *              content sections and the "transforms" to apply to the data *
- *              they contain should be inferred from the section name and  *
- *              the meta-files referenced using that name; however, all of *
- *              the files I've been able to get my hands on appear to have *
- *              only two sections: Uncompressed and MSCompressed.          *
- *              Additionally, the ITSS.DLL file included with Windows does *
- *              not appear to handle any different transforms than the     *
- *              simple LZX-transform.  Furthermore, the list of transforms *
- *              to apply is broken, in that only half the required space   *
- *              is allocated for the list.  (It appears as though the      *
- *              space is allocated for ASCII strings, but the strings are  *
- *              written as unicode.  As a result, only the first half of   *
- *              the string appears.)  So this is probably not too big of   *
- *              a deal, at least until CHM v4 (MS .lit files), which also  *
- *              incorporate encryption, of some description.               *
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU Lesser General Public License as        *
- *   published by the Free Software Foundation; either version 2.1 of the  *
- *   License, or (at your option) any later version.                       *
- *                                                                         *
- ***************************************************************************/
-
+﻿/*
+ * libchmsharp2 - a C# port of chmlib
+ * Copyright (C) 2011 MindTouch, Inc.
+ * www.mindtouch.com  oss@mindtouch.com
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+ */
 using System;
 using System.Collections.Generic;
 using System.IO;
