@@ -84,7 +84,7 @@ namespace CHMsharp
             Unmarshal.ToByteArray(ref pData, ref pDataPos, ref pDataLen, ref dest.unknown_0044, 16);
 
             /* error check the data */
-            if (new String(dest.signature).CompareTo("ITSP") != 0)
+            if (new String(dest.signature).CompareTo("ITSP\0") != 0)
                 return false;
             if (dest.version != 1)
                 return false;
