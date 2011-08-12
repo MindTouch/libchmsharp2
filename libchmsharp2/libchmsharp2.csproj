@@ -71,6 +71,7 @@
     <Compile Include="cmhFileInfo.cs" />
     <Compile Include="Lzx.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="System.cs" />
     <Compile Include="Unmarshal.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
