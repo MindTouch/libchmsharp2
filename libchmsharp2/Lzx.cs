@@ -1,29 +1,22 @@
-﻿/***************************************************************************
- *                        lzx.c - LZX decompression routines               *
- *                           -------------------                           *
- *                                                                         *
- *  maintainer: Bob Carroll <bob.carroll@alum.rit.edu>                     *
- *  source:     C# port of lzx.c from CHMLib                               *
- *  notes:      This file was taken from CHMLib v0.40a and before that     *
- *              cabextract v0.5, which was, itself, a modified version of  *
- *              the lzx decompression code from unlzx.                     *
- *                                                                         *
- *  platforms:  Microsoft CLR and Mono                                     *
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.  Note that an exemption to this   *
- *   license has been granted by Stuart Caie for the purposes of           *
- *   distribution with chmlib.  This does not, to the best of my           *
- *   knowledge, constitute a change in the license of this (the LZX) code  *
- *   in general.                                                           *
- *                                                                         *
- ***************************************************************************/
-
+﻿/*
+ * libchmsharp2 - a C# port of chmlib
+ * Copyright (C) 2011 MindTouch, Inc.
+ * www.mindtouch.com  oss@mindtouch.com
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+ */
 using System;
 using System.Collections.Generic;
 using System.Linq;
