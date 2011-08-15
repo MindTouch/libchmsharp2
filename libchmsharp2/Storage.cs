@@ -1,4 +1,23 @@
-﻿using System;
+﻿/*
+ * libchmsharp2 - a C# port of chmlib
+ * Copyright (C) 2011 MindTouch, Inc.
+ * www.mindtouch.com  oss@mindtouch.com
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+ */
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -23,7 +42,7 @@ namespace CHMsharp
         public const string CHMU_CONTENT = "::DataSpace/Storage/MSCompressed/Content";
         public const string CHMU_SPANINFO = "::DataSpace/Storage/MSCompressed/SpanInfo";
 
-        public static Int64 FetchBytes(ref chmFileInfo h, ref byte[] buf, UInt64 os, Int64 len)
+        public static Int64 FetchBytes(ref ChmFileInfo h, ref byte[] buf, UInt64 os, Int64 len)
         {
             Int64 readLen = 0;
             long cur = 0;
