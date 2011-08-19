@@ -308,12 +308,13 @@ namespace CHMsharp
                 /* now, if it is a leaf node: */
                 if (ASCIIEncoding.UTF8.GetString(page_buf, 0, 4).CompareTo(Pmgl.CHM_PMGL_MARKER) == 0) {
                     /* scan block */
-                    uint pEntry = (uint)Pmgl.FindInPmgl(page_buf, _h.block_len, objPath);
+                    long pEntry = Pmgl.FindInPmgl(page_buf, _h.block_len, objPath);
                     if (pEntry < 0)
                         return false;
 
                     /* parse entry and return */
-                    Pmgl.ParsePgmlEntry(page_buf, ref pEntry, ref ui);
+                    uint os = (uint)pEntry;
+                    Pmgl.ParsePgmlEntry(page_buf, ref os, ref ui);
                     return true;
                 }
 

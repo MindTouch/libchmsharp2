@@ -73,7 +73,7 @@ namespace CHMsharp
                     return -1;
 
                 /* check if it is the right name */
-                if (String.Compare(new String(buffer), objPath, true) == 0)
+                if (String.Compare(new String(buffer), objPath, true) > 0)
                     return page;
 
                 /* load next value for path */
