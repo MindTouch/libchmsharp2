@@ -77,7 +77,7 @@ namespace CHMsharp
                     return -1;
 
                 /* check if it is the right name */
-                if (String.Compare(new String(buffer), objPath, true) == 0)
+                if (Pmgi.strcasecmp(new String(buffer), objPath) == 0)
                     return (long)temp;
 
                 SkipPmglEntryData(page_buf, ref cur);

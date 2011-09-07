@@ -73,7 +73,7 @@ namespace CHMsharp
                     return -1;
 
                 /* check if it is the right name */
-                if (String.Compare(new String(buffer), objPath, true) > 0)
+                if (strcasecmp(new String(buffer), objPath) > 0)
                     return page;
 
                 /* load next value for path */
@@ -101,6 +101,12 @@ namespace CHMsharp
                 return false;
 
             return true;
+        }
+
+        /* emulates strcasecmp by converting to lower case and comparing ordinals. see STRCASECMP(3) */
+        public static int strcasecmp(string a, string b)
+        {
+            return String.Compare(a.ToLower(), b.ToLower(), StringComparison.Ordinal);
         }
     }
 }
